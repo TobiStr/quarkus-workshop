@@ -1,0 +1,6 @@
+# Force bash scripts to always use lf as line endings to avoid problems with OS interop
+*.sh            text eol=lf
+
+# Force cmd/bat scripts to always use crlf as line endings to avoid problems with OS interop
+*.cmd           text eol=crlf
+*.bat           text eol=crlf

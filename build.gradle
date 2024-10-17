@@ -1,0 +1,122 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id 'jacoco'
+    id 'io.freefair.lombok' version "8.10"
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    // The version of the Quarkus BOM should match the version of the
+    // Quarkus plugin as declared in /build.gradle
+    implementation enforcedPlatform('io.quarkus.platform:quarkus-bom:3.14.1')
+    implementation 'io.quarkus:quarkus-arc'
+
+    // Containerization
+    implementation 'io.quarkus:quarkus-container-image-jib'
+
+    // REST Server (for receiving requests from frontends)
+    implementation 'io.quarkus:quarkus-rest-jackson'
+    implementation 'io.quarkus:quarkus-hibernate-validator'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+
+    // REST Client (for calling other backends)
+    implementation 'io.quarkus:quarkus-rest-client-jackson'
+
+    // Fault Tolerance (e.g. Circuit Breakers)
+    implementation 'io.quarkus:quarkus-smallrye-fault-tolerance'
+
+    // Info, Health, Metrics, Tracing
+    implementation 'io.quarkus:quarkus-info'
+    implementation 'io.quarkus:quarkus-smallrye-health'
+    implementation 'io.quarkus:quarkus-micrometer-registry-prometheus'
+    implementation 'io.quarkus:quarkus-opentelemetry'
+    implementation 'io.opentelemetry:opentelemetry-extension-trace-propagators'
+
+    // Logging
+    implementation 'io.quarkiverse.loggingjson:quarkus-logging-json:3.1.0'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+
+    // Apache Commons
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-lang3:3.16.0'
+
+    implementation 'io.quarkus:quarkus-mutiny'
+
+    // Mediator package
+    implementation 'net.sizovs:pipelinr:0.8'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    // MapStruct
+    implementation 'org.mapstruct:mapstruct:1.6.0'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.0'
+
+    // Add support for new date types serialization
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.quarkus:quarkus-junit5-mockito'
+    testImplementation 'io.quarkus:quarkus-jacoco'
+    testImplementation 'io.rest-assured:rest-assured'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.13.0'
+    testImplementation 'com.tngtech.archunit:archunit-junit5:1.3.0'
+
+    testImplementation 'org.mockito:mockito-inline:3.4.6'
+    testImplementation 'org.assertj:assertj-core:3.25.1'
+}
+
+group = 'com.example'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+    options.compilerArgs << '-Xlint:deprecation'
+    options.compilerArgs << '-Xlint:unchecked'
+    // fail the build on unmapped target fields
+    options.compilerArgs.add "-Amapstruct.unmappedTargetPolicy=ERROR"
+}
+
+test {
+    systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
+    systemProperty 'quarkus.jacoco.report-location', 'build/reports/jacoco'
+
+    finalizedBy jacocoTestReport
+    jacoco {
+        excludeClassLoaders = ["*QuarkusClassLoader"]
+        destinationFile = layout.buildDirectory.file("jacoco-quarkus.exec").get().asFile
+    }
+
+    jacocoTestReport.enabled = false
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+// Fix GRADLE_OPTS not being evaluated, at least for system properties.
+// See also https://youtrack.jetbrains.com/issue/IDEA-253331.
+String gradleOpts = System.getenv("GRADLE_OPTS")
+if (gradleOpts != null) {
+    for (opt in gradleOpts.split(" ").findAll { it.startsWith("-D") }) {
+        String[] entry = opt.substring(2).split("=")
+        System.setProperty(entry[0], entry[1])
+    }
+}

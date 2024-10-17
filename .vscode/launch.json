@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Remote Debug",
+      "request": "attach",
+      "hostName": "localhost",
+      "port": 5005,
+      "stepFilters": {
+        "skipClasses": [
+          "java.*",
+          "javax.*",
+          "sun.*",
+          "com.sun.*",
+          "org.eclipse.*",
+          "com.intellij.*",
+          "com.example.external.*" // Add any other package patterns you want to skip
+        ],
+        "skipSynthetics": true,
+        "skipStaticInitializers": true,
+        "skipConstructors": false
+      }
+    }
+  ]
+}

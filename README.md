@@ -1,6 +1,6 @@
-# arrk-arrk-dsa-quarkus-workshop
+# Quarkus Workshop
 
-Template for the DSA Workshop with the goal to create a Java Microservice with Quarkus, based on **Clean Architecture** with Gradle build system.
+Template for a Quarkus Workshop with the goal to create a Java Microservice with Quarkus, based on **Clean Architecture** with Gradle build system.
 
 ## Requirements
 

@@ -1,0 +1,22 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.gradle.buildServer.enabled": "off",
+  "java.format.settings.url": "java-formatter.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "java.settings.url": ".vscode/settings.prefs",
+  "java.debug.settings.onBuildFailureProceed": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.gradle": true,
+    "**/.idea": true,
+    "**/bin": false,
+    "**/build": false
+  },
+  "explorerExclude.backup": {}
+}
