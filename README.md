@@ -15,8 +15,8 @@ Template for a Quarkus Workshop with the goal to create a Java Microservice with
 
 1. Clone the repository to your local machine
 2. Create two branches:
-   1. solution/<your-name> (or pseudo name)
-   2. development/<your-name>
+   1. solution/your-name (or pseudo name)
+   2. development/your-name
 3. Work in your "development" branch and when your done, create a Pull Request to your solution branch.
 
 ## Tasks (Part 1)
