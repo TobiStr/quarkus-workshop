@@ -6,32 +6,34 @@ Template for a Quarkus Workshop with the goal to create a Java Microservice with
 
 1. Java 21 ([Zulu 21](https://www.azul.com/))
 2. VSCode, IntelliJ or whatever you prefer
-3. (Optional) Docker
-4. Try not to use ChatGPT or other LLMs. Instead use google or quarkus docs etc...
+3. Docker
+
+-   Try not to use ChatGPT or other LLMs. Instead use google or quarkus docs etc...
+-   You may also use existing github repositories as reference
 
 ## Tasks (Part 1)
 
 -   Implement a functioning Web-API in Quarkus, that:
     -   Can **Create**, **Delete** and **Get** an **Appointment**
-    -   Stores data in a (temporary) database (H2 or postgreSQL with docker)
+    -   Stores data in a (temporary) database (PostgreSQL with docker)
     -   Has at least one Integration Test, that executes a whole GET workflow
 -   Separate your code into the layers: API, Business, Core, Infrastructure
     -   Put your classes in the correct layers
     -   ArchitectureTests are given. They must pass during testing.
 -   Implement mappers to communicate between the layers: API --> Business <-- Infrastructure
-- Test your endpoints with Postman (or similar, like curl)
+-   Test your endpoints with Postman (or similar, like curl)
 
 <details>
   <summary>If you are too fast, here are some optional tasks:</summary>
 
-- Implement GET and DELETE methods for multiple appointments at once.
-- Implement unittests for the business logic and the controllers.
-- Think about how Errors could be handled in a clean way.
-    - Error Codes must be available for debugging
-    - The caller of the API should get the error code and a short message.
-    - The caller must not see the detailed exception.
-    - Developers should be able to easily use the error handling in the code.
-    - Wrong useage and unhandled exceptions should be avoided by design.
+-   Implement GET and DELETE methods for multiple appointments at once.
+-   Implement unittests for the business logic and the controllers.
+-   Think about how Errors could be handled in a clean way.
+    -   Error Codes must be available for debugging
+    -   The caller of the API should get the error code and a short message.
+    -   The caller must not see the detailed exception.
+    -   Developers should be able to easily use the error handling in the code.
+    -   Wrong useage and unhandled exceptions should be avoided by design.
 
 </details>
 
@@ -46,8 +48,7 @@ title: Appointment Model
 classDiagram
     class Appointment{
         - String id
-        - Date date
-        - Time time
+        - ZonedDateTime date
         - String location
         - String title
         - String description
@@ -64,7 +65,7 @@ title: Appointment Database Model
 classDiagram
     class AppointmentEntity{
         - ...
-        - Date createdAt
+        - ZonedDateTime createdAt
     }
 ```
 
@@ -76,8 +77,7 @@ title: Appointment API Model
 ---
 classDiagram
     class Appointment{
-        - Date date
-        - Time time
+        - ZonedDateTime date
         - String location
         - String title
         - String description
@@ -87,17 +87,19 @@ classDiagram
 ## Tasks (Part 2)
 
 Only view the following tasks after we have finished the first task all together!
+
 <details>
   <summary>Click to expand</summary>
 
-- In the **docs** folder, you will find an implementation of a Result type. Please use this Result or ActionResult type where it makes sense.
-- Add good logging to methods, where you think it is relevant.
-- Add error handling so, that you do not have unhandled exceptions in the whole application.
-- (Optional) Desing and implement a good exception handling mechanism for the whole application.
+-   In the **docs** folder, you will find an implementation of a Result type. Please use this Result or ActionResult type where it makes sense.
+-   Add good logging to methods, where you think it is relevant.
+-   Add error handling so, that you do not have unhandled exceptions in the whole application.
+-   (Optional) Desing and implement a good exception handling mechanism for the whole application.
 
 </details>
 
 ## Additional Information
+
 ### Commands
 
 | Description | Command                |
