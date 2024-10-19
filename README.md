@@ -11,6 +11,14 @@ Template for a Quarkus Workshop with the goal to create a Java Microservice with
 -   Try not to use ChatGPT or other LLMs. Instead use google or quarkus docs etc...
 -   You may also use existing github repositories as reference
 
+## Initial Setup
+
+1. Clone the repository to your local machine
+2. Create two branches:
+   1. solution/<your-name> (or pseudo name)
+   2. development/<your-name>
+3. Work in your "development" branch and when your done, create a Pull Request to your solution branch.
+
 ## Tasks (Part 1)
 
 -   Implement a functioning Web-API in Quarkus, that:
