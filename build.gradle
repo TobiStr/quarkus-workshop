@@ -11,31 +11,31 @@ repositories {
 }
 
 dependencies {
-    // The version of the Quarkus BOM should match the version of the
-    // Quarkus plugin as declared in /build.gradle
-    implementation enforcedPlatform('io.quarkus.platform:quarkus-bom:3.14.1')
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-arc'
 
     // Containerization
     implementation 'io.quarkus:quarkus-container-image-jib'
 
     // REST Server (for receiving requests from frontends)
+    implementation 'io.quarkus:quarkus-rest'
     implementation 'io.quarkus:quarkus-rest-jackson'
     implementation 'io.quarkus:quarkus-hibernate-validator'
     implementation 'io.quarkus:quarkus-smallrye-openapi'
+    implementation 'io.quarkus:quarkus-mutiny'
 
     // REST Client (for calling other backends)
     implementation 'io.quarkus:quarkus-rest-client-jackson'
 
+    // Database
+    implementation 'io.quarkus:quarkus-hibernate-orm'
+    implementation 'io.quarkus:quarkus-hibernate-orm-panache'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+    implementation 'io.quarkus:quarkus-flyway'
+    implementation 'org.flywaydb:flyway-database-postgresql'
+
     // Fault Tolerance (e.g. Circuit Breakers)
     implementation 'io.quarkus:quarkus-smallrye-fault-tolerance'
-
-    // Info, Health, Metrics, Tracing
-    implementation 'io.quarkus:quarkus-info'
-    implementation 'io.quarkus:quarkus-smallrye-health'
-    implementation 'io.quarkus:quarkus-micrometer-registry-prometheus'
-    implementation 'io.quarkus:quarkus-opentelemetry'
-    implementation 'io.opentelemetry:opentelemetry-extension-trace-propagators'
 
     // Logging
     implementation 'io.quarkiverse.loggingjson:quarkus-logging-json:3.1.0'
@@ -45,7 +45,6 @@ dependencies {
     implementation 'org.apache.commons:commons-collections4:4.4'
     implementation 'org.apache.commons:commons-lang3:3.16.0'
 
-    implementation 'io.quarkus:quarkus-mutiny'
 
     // Mediator package
     implementation 'net.sizovs:pipelinr:0.8'
@@ -68,7 +67,6 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.13.0'
     testImplementation 'com.tngtech.archunit:archunit-junit5:1.3.0'
-
     testImplementation 'org.mockito:mockito-inline:3.4.6'
     testImplementation 'org.assertj:assertj-core:3.25.1'
 }
