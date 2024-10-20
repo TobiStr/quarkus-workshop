@@ -1,5 +1,7 @@
 package com.example.core.primitives.results;
 
+import com.example.core.exceptions.ErrorCode;
+import com.example.core.exceptions.ResultEmptyException;
 import com.example.core.exceptions.base.DomainException;
 
 import java.util.Objects;
