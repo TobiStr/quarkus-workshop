@@ -1,4 +1,4 @@
-# Quarkus Workshop
+# Quarkus Clean Architecture Workshop
 
 Template for a Quarkus Workshop with the goal to create a Java Microservice with Quarkus, based on **Clean Architecture** with Gradle build system.
 
@@ -34,6 +34,7 @@ Template for a Quarkus Workshop with the goal to create a Java Microservice with
 <details>
   <summary>If you are too fast, here are some optional tasks:</summary>
 
+-   Use a Mediator to forward commands to the Business Logic
 -   Implement GET and DELETE methods for multiple appointments at once.
 -   Implement unittests for the business logic and the controllers.
 -   Think about how Errors could be handled in a clean way.
@@ -101,10 +102,16 @@ Only view the following tasks after we have finished the first task all together
 
 -   In the **docs** folder, you will find an implementation of a Result type. Please use this Result or ActionResult type where it makes sense.
 -   Add good logging to methods, where you think it is relevant.
--   Add error handling so, that you do not have unhandled exceptions in the whole application.
+-   Add an error handling system, so that unhandled exceptions cannot occur and that the user is returned a meaningful HTTP Response.
 -   (Optional) Desing and implement a good exception handling mechanism for the whole application.
+-   (Optional) Implement at least one Integration Test to test the behavior of an exception
 
 </details>
+
+## Logging
+
+To use a logger, annotate the class with `@lombok.extern.slf4j.Slf4j` and use the SLF4J logger with e.g.
+`LOGGER.info("Hello!");`.
 
 ## Additional Information
 
@@ -305,11 +312,6 @@ graph TD
     end
 
 ```
-
-## Logging
-
-To use a logger, annotate the class with `@lombok.extern.slf4j.Slf4j` and use the SLF4J logger with e.g.
-`LOGGER.info("Hello!");`.
 
 ## Resources
 
