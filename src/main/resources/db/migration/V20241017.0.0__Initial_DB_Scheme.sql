@@ -1,13 +1,11 @@
 create schema if not exists public;
 
 CREATE
-OR REPLACE FUNCTION update_last_modified_date() RETURNS TRIGGER AS $ $ BEGIN NEW.created_at = CURRENT_TIMESTAMP;
-
+OR REPLACE FUNCTION update_last_modified_date() RETURNS TRIGGER AS $$ BEGIN NEW.created_at = CURRENT_TIMESTAMP;
 RETURN NEW;
-
 END;
 
-$ $ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
 
 CREATE TABLE IF NOT EXISTS public.appointment (
     id VARCHAR(3) PRIMARY KEY,
